@@ -9778,6 +9778,23 @@ header h1 {
 }
 
 @media (max-width: 576px) {
+  .carousel-inner {
+    width: 100%;
+  }
+  .carousel-item {
+    width: 100%;
+  }
+  .carousel-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  .carousel-inner {
+    width: 100%;
+  }
+  .carousel-item {
+    width: 100%;
+  }
   .carousel-caption {
     padding: 1rem;
   }
@@ -10428,3 +10445,4 @@ header h1 {
 
   .carousel-caption .d-inline-block h3, .carousel-caption .d-inline-block h4 {
     border-radius: 0.25rem;
+  }
