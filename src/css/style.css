@@ -5984,7 +5984,18 @@ a.close.disabled {
   list-style: none;
 }
 
-.carousel-indicators li {
+  .carousel-indicators li {
+}
+
+/* Adjust countdown text size for smaller screens */
+@media (max-width: 767.98px) {
+    #countdown div, #countdown2 div {
+        font-size: 2rem; /* Adjust the font size as needed */
+    }
+    #countdown div div, #countdown2 div div {
+        font-size: 1rem; /* Adjust the font size for the labels */
+    }
+}
   box-sizing: content-box;
   flex: 0 1 auto;
   width: 30px;
