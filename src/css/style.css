@@ -9805,8 +9805,32 @@ header h1 {
     padding: 1rem;
   }
 
-  .carousel-caption h1 {
-    font-size: 2rem;
+    .carousel-caption h1 {
+      font-size: 12rem;
+  }
+
+  @media (max-width: 1200px) {
+      .carousel-caption h1 {
+          font-size: 10rem;
+      }
+  }
+
+  @media (max-width: 992px) {
+      .carousel-caption h1 {
+          font-size: 8rem;
+      }
+  }
+
+  @media (max-width: 768px) {
+      .carousel-caption h1 {
+          font-size: 6rem;
+      }
+  }
+
+  @media (max-width: 576px) {
+      .carousel-caption h1 {
+          font-size: 4rem;
+      }
   }
 
   .carousel-caption h3, .carousel-caption h4 {
