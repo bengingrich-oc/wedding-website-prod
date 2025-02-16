@@ -14,7 +14,7 @@
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -30,7 +30,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Set the date we're counting down to
-            var countDownDate = new Date("July 18, 2026 00:00:00").getTime();
+            var countDownDate = new Date("February 15, 2024 00:00:00").getTime();
 
             // Update the count down every 1 second
             var x = setInterval(function() {
@@ -48,29 +48,116 @@
 
                 // Display the result in the elements with id="countdown" and id="countdown2"
                 var countdownHTML = 
-                    "<div style='display: flex; justify-content: space-around; width: 100%;'>" +
+                    "<div style='display: flex; justify-content: space-around; width: 100%; font-family: \"Crimson Text\", serif;'>" +
                     "<div style='text-align: center; margin: 0 20px;'>" +
-                    "<div style='font-size: 4rem;'>" + days + "</div><div>Days</div></div>" +
+                    "<div style='font-size: 2.5rem;'>" + days + "</div><div style='font-size: 1rem;'>Days</div></div>" +
                     "<div style='text-align: center; margin: 0 20px;'>" +
-                    "<div style='font-size: 4rem;'>" + hours + "</div><div>Hours</div></div>" +
+                    "<div style='font-size: 2.5rem;'>" + hours + "</div><div style='font-size: 1rem;'>Hours</div></div>" +
                     "<div style='text-align: center; margin: 0 20px;'>" +
-                    "<div style='font-size: 4rem;'>" + minutes + "</div><div>Minutes</div></div>" +
+                    "<div style='font-size: 2.5rem;'>" + minutes + "</div><div style='font-size: 1rem;'>Minutes</div></div>" +
                     "<div style='text-align: center; margin: 0 20px;'>" +
-                    "<div style='font-size: 4rem;'>" + seconds + "</div><div>Seconds</div></div></div>";
+                    "<div style='font-size: 2.5rem;'>" + seconds + "</div><div style='font-size: 1rem;'>Seconds</div></div></div>";
 
                 document.getElementById("countdown").innerHTML = countdownHTML;
                 document.getElementById("countdown2").innerHTML = countdownHTML;
 
-                // If the count down is over, write some text 
+                // If the count down is over, write some text and show confetti
                 if (distance < 0) {
                     clearInterval(x);
-                    document.getElementById("countdown").innerHTML = "EXPIRED";
-                    document.getElementById("countdown2").innerHTML = "EXPIRED";
+                    document.getElementById("countdown").innerHTML = "<div style='font-family: \"Crimson Text\", serif;'>Our Wedding Day is Here!</div>";
+                    document.getElementById("countdown2").innerHTML = "<div style='font-family: \"Crimson Text\", serif;'>Our Wedding Day is Here!</div>";
+                    showConfetti();
                 }
             }, 1000);
+
+            function showConfetti() {
+                var confettiContainer = document.createElement("div");
+                confettiContainer.style.position = "fixed";
+                confettiContainer.style.top = "0";
+                confettiContainer.style.left = "0";
+                confettiContainer.style.width = "100%";
+                confettiContainer.style.height = "100%";
+                confettiContainer.style.pointerEvents = "none";
+                confettiContainer.style.zIndex = "9999";
+                document.body.appendChild(confettiContainer);
+
+                var style = document.createElement("style");
+                style.innerHTML = `
+                    @keyframes confetti-fall {
+                        0% { transform: translateY(-100vh) rotate(0); }
+                        100% { transform: translateY(100vh) rotate(360deg); }
+                    }
+                `;
+                document.head.appendChild(style);
+
+                function createConfetti() {
+                    for (var i = 0; i < 200; i++) { // Increased the number of confetti elements
+                        var confetti = document.createElement("div");
+                        confetti.style.position = "absolute";
+                        confetti.style.width = "10px";
+                        confetti.style.height = "10px";
+                        confetti.style.backgroundColor = getRandomColor();
+                        confetti.style.top = Math.random() * -100 + "vh"; // Start off-screen
+                        confetti.style.left = Math.random() * 100 + "%";
+                        confetti.style.animation = "confetti-fall 3s linear infinite";
+                        confetti.style.animationDelay = Math.random() * 3 + "s";
+                        confettiContainer.appendChild(confetti);
+                    }
+                }
+
+                createConfetti();
+
+                // Remove confetti after 15 seconds
+                setTimeout(function() {
+                    document.body.removeChild(confettiContainer);
+                }, 15000); // Increased the duration to 15 seconds
+            }
+
+            function getRandomColor() {
+                var letters = "0123456789ABCDEF";
+                var color = "#";
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
         });
     </script>
     <!-- Countdown Script End -->
+    <style>
+        .carousel-control-custom {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 68px;
+            height: 68px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .carousel-control-prev-custom {
+            left: 0;
+            margin-left: 10px;
+        }
+
+        .carousel-control-next-custom {
+            right: 0;
+            margin-right: 10px;
+        }
+
+        .carousel-control-prev-custom:hover,
+        .carousel-control-next-custom:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .carousel-caption {
+            z-index: 1;
+        }
+    </style>
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="51">
@@ -110,10 +197,10 @@
                     <img class="position-absolute w-100 h-100" src="img/carousel-1.jpg" style="object-fit: cover;">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
-                            <h1 class="display-1 font-secondary text-white mt-n3 mb-md-4">Taylor & Ben</h1>
+                            <h1 class="display-1 font-secondary text-white mt-n3 mb-md-4" style="font-size: 12rem;">t & b</h1>
                             <div class="d-inline-block border-top border-bottom border-light py-3 px-4">
-                                <h3 class="text-uppercase font-weight-bold text-white m-0" style="letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">We're getting married</h3>
-                                <h4 class="text-uppercase font-weight-bold text-white m-0" style="letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">July 18th, 2026</h4>
+                                <h3 class="text-uppercase font-weight-bold text-white m-0" style="letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-family: 'Crimson Text', serif;">We're getting married</h3>
+                                <h4 class="text-uppercase font-weight-bold text-white m-0" style="letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-family: 'Crimson Text', serif;">July 18th, 2026</h4>
                             </div>
                             <div id="countdown" class="text-white mt-4 d-flex justify-content-center" style="font-family: 'Montserrat', sans-serif; font-size: 3rem; width: 100%;"></div>
                         </div>
@@ -123,7 +210,7 @@
                     <img class="position-absolute w-100 h-100" src="img/carousel-2.jpg" style="object-fit: cover; object-position: top;">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
-                            <h1 class="display-1 font-secondary text-white mt-n3 mb-md-4">Taylor & Ben</h1>
+                            <h1 class="display-1 font-secondary text-white mt-n3 mb-md-4" style="font-size: 12rem;">t & b</h1>
                             <div class="d-inline-block border-top border-bottom border-light py-3 px-4">
                                 <h3 class="text-uppercase font-weight-bold text-white m-0" style="letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">We're getting married</h3>
                                 <h4 class="text-uppercase font-weight-bold text-white m-0" style="letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">July 18th, 2026</h4>
@@ -133,15 +220,11 @@
                     </div>
                 </div>
             </div>
-            <a class="carousel-control-prev justify-content-start" href="#header-carousel" data-slide="prev">
-                <div class="btn btn-primary px-0" style="width: 68px; height: 68px;">
-                    <span class="carousel-control-prev-icon mt-3"></span>
-                </div>
+            <a class="carousel-control-prev carousel-control-custom carousel-control-prev-custom" href="#header-carousel" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
             </a>
-            <a class="carousel-control-next justify-content-end" href="#header-carousel" data-slide="next">
-                <div class="btn btn-primary px-0" style="width: 68px; height: 68px;">
-                    <span class="carousel-control-next-icon mt-3"></span>
-                </div>
+            <a class="carousel-control-next carousel-control-custom carousel-control-next-custom" href="#header-carousel" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
             </a>
         </div>
     </div>
