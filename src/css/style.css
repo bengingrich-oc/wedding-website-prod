@@ -9572,7 +9572,10 @@ a.text-dark:hover, a.text-dark:focus {
   right: calc(50% - 80px);
   background: #444444;
 }
-
+#gallery .section-title::before,
+#gallery .section-title::after {
+    background: #ffffff;
+}
 .btn-play {
   position: relative;
   margin-top: 50px;
