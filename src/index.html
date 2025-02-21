@@ -665,8 +665,16 @@
                                 <textarea class="form-control bg-secondary border-0 py-2 px-3" rows="5" placeholder="Message" name="message" required></textarea>
                             </div>
                             <div>
-                                <button class="btn btn-primary font-weight-bold py-3 px-5" type="submit">Submit</button>
+                                <button id="submit-button" class="btn btn-primary font-weight-bold py-3 px-5" type="submit" onclick="showSpinner()">
+                                    <span>Submit</span>
+                                    <span id="loading-spinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
+                                </button>
                             </div>
+                            <script>
+                                function showSpinner() {
+                                    document.getElementById('loading-spinner').style.display = 'inline-block';
+                                }
+                            </script>
                         </form>
                         <div id="rsvp-success" class="text-center bg-secondary p-4 mt-4" style="display: none; border-radius: 5px;">
                             <h2 class="font-secondary text-primary">Thank You!</h2>
@@ -686,12 +694,17 @@
 
         form.addEventListener('submit', e => {
             e.preventDefault();
+            const submitButton = document.getElementById('submit-button');
+            submitButton.disabled = true;
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                 .then(response => {
                     form.style.display = 'none';
                     successMessage.style.display = 'block';
                 })
-                .catch(error => console.error('Error!', error.message));
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    submitButton.disabled = false;
+                });
             return false;
         });
     </script>
