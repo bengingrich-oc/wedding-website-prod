@@ -9880,9 +9880,9 @@ header h1 {
     font-size: 1rem;
   }
 
-  @media (max-width: 576px) {
+@media (max-width: 576px) {
     .portfolio-item {
-        margin-bottom: 20px; /* Adjust the margin as needed */
+        margin-bottom: 40px; /* Increased margin to prevent overlapping */
     }
 }
 
