@@ -734,38 +734,41 @@
 <!-- Google Sheets RSVP Integration -->
 <script>
     function getGuests() {
-    var inviteCode = document.getElementById('inviteCode').value;
-    fetch('https://script.google.com/macros/s/AKfycbxSeX5XhiE5aLBwGA1EA0Q6VNmoVtUjIA60JiTCFRz5/dev?inviteCode=' + inviteCode)
+        var inviteCode = document.getElementById('inviteCode').value;
+        fetch('https://script.google.com/macros/s/AKfycbxSeX5XhiE5aLBwGA1EA0Q6VNmoVtUjIA60JiTCFRz5/dev?inviteCode=' + inviteCode, {
+            mode: 'no-cors'
+        })
         .then(response => response.json())
         .then(data => displayGuests(data))
         .catch(error => console.error('Error:', error));
-}
-
-function submitRSVP() {
-    var inviteCode = document.getElementById('inviteCode').value;
-    var guestList = document.getElementById('guestList').children;
-    var responses = [];
-    
-    for (var i = 0; i < guestList.length; i++) {
-        var guest = guestList[i].getElementsByTagName('label')[0].innerText;
-        var status = guestList[i].getElementsByTagName('select')[0].value;
-        responses.push({name: guest, status: status});
     }
-    
-    fetch('https://script.google.com/macros/s/AKfycbxSeX5XhiE5aLBwGA1EA0Q6VNmoVtUjIA60JiTCFRz5/dev', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({inviteCode: inviteCode, responses: responses}),
-    })
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('rsvp-form').style.display = 'none';
-        document.getElementById('rsvp-success').style.display = 'block';
-    })
-    .catch(error => console.error('Error:', error));
-}
+
+    function submitRSVP() {
+        var inviteCode = document.getElementById('inviteCode').value;
+        var guestList = document.getElementById('guestList').children;
+        var responses = [];
+        
+        for (var i = 0; i < guestList.length; i++) {
+            var guest = guestList[i].getElementsByTagName('label')[0].innerText;
+            var status = guestList[i].getElementsByTagName('select')[0].value;
+            responses.push({name: guest, status: status});
+        }
+        
+        fetch('https://script.google.com/macros/s/AKfycbxSeX5XhiE5aLBwGA1EA0Q6VNmoVtUjIA60JiTCFRz5/dev', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({inviteCode: inviteCode, responses: responses}),
+            mode: 'no-cors'
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('rsvp-form').style.display = 'none';
+            document.getElementById('rsvp-success').style.display = 'block';
+        })
+        .catch(error => console.error('Error:', error));
+    }
 </script>
 <!-- Google Sheets RSVP Integration End -->
 
