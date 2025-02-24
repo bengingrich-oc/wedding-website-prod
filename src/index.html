@@ -700,6 +700,75 @@
     </script>
     <!-- Submission to RSVP Google Sheet End-->
 
+    <!-- RSVP Start -->
+<div class="container-fluid py-5" id="rsvp">
+    <div class="container py-5">
+        <div class="section-title position-relative text-center">
+            <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">RSVP</h6>
+            <h1 class="font-secondary display-4">Join Our Party</h1>
+            <i class="far fa-heart text-dark"></i>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="text-center">
+                    <form id="rsvp-form" onsubmit="return false;">
+                        <div class="form-group">
+                            <label for="inviteCode">Invite Code:</label>
+                            <input type="text" class="form-control bg-secondary border-0 py-4 px-3" id="inviteCode" placeholder="Enter Invite Code" required>
+                        </div>
+                        <button type="button" class="btn btn-primary font-weight-bold py-3 px-5" onclick="getGuests()">Get Guests</button>
+                        <div id="guestList" class="mt-4"></div>
+                        <button type="button" class="btn btn-primary font-weight-bold py-3 px-5 mt-4" onclick="submitRSVP()">Submit RSVP</button>
+                    </form>
+                    <div id="rsvp-success" class="text-center bg-secondary p-4 mt-4" style="display: none; border-radius: 5px;">
+                        <h2 class="font-secondary text-primary">Thank You!</h2>
+                        <p class="text-muted">We have received your RSVP submission. We look forward to celebrating with you!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- RSVP End -->
+
+<!-- Google Sheets RSVP Integration -->
+<script>
+    function getGuests() {
+    var inviteCode = document.getElementById('inviteCode').value;
+    fetch('https://script.google.com/macros/s/AKfycbxSeX5XhiE5aLBwGA1EA0Q6VNmoVtUjIA60JiTCFRz5/dev?inviteCode=' + inviteCode)
+        .then(response => response.json())
+        .then(data => displayGuests(data))
+        .catch(error => console.error('Error:', error));
+}
+
+function submitRSVP() {
+    var inviteCode = document.getElementById('inviteCode').value;
+    var guestList = document.getElementById('guestList').children;
+    var responses = [];
+    
+    for (var i = 0; i < guestList.length; i++) {
+        var guest = guestList[i].getElementsByTagName('label')[0].innerText;
+        var status = guestList[i].getElementsByTagName('select')[0].value;
+        responses.push({name: guest, status: status});
+    }
+    
+    fetch('https://script.google.com/macros/s/AKfycbxSeX5XhiE5aLBwGA1EA0Q6VNmoVtUjIA60JiTCFRz5/dev', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({inviteCode: inviteCode, responses: responses}),
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('rsvp-form').style.display = 'none';
+        document.getElementById('rsvp-success').style.display = 'block';
+    })
+    .catch(error => console.error('Error:', error));
+}
+</script>
+<!-- Google Sheets RSVP Integration End -->
+
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white py-5" id="contact" style="margin-top: 90px;">
         <div class="container text-center py-5">
