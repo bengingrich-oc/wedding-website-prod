@@ -287,7 +287,6 @@
         <div class="section-title position-relative text-center">
             <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">About</h6>
             <h1 class="font-secondary display-4">Bride & Groom</h1>
-            <i class="far fa-heart text-dark"></i>
         </div>
         <!-- Bride Section -->
         <div class="row m-0 mb-4 mb-md-0 pb-2 pb-md-0" style="border: 4px solid black; border-radius: 15px; margin: 0; padding: 0;">
@@ -327,7 +326,6 @@
             <div class="section-title position-relative text-center">
                 <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">Story</h6>
                 <h1 class="font-secondary display-4">Our Love Story</h1>
-                <i class="far fa-heart text-dark"></i>
             </div>
             <div class="container timeline position-relative p-0">
                 <div class="row">
@@ -412,7 +410,6 @@
         <div class="section-title position-relative text-center" style="margin-bottom: 120px;">
             <h6 class="text-uppercase text-white mb-3" style="letter-spacing: 3px;">Gallery</h6>
             <h1 class="font-secondary display-4 text-white">Our Photo Gallery</h1>
-            <i class="far fa-heart text-white"></i>
         </div>
         <div class="owl-carousel gallery-carousel">
             <div class="gallery-item">
@@ -461,7 +458,6 @@
             <div class="section-title position-relative text-center">
                 <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">Event</h6>
                 <h1 class="font-secondary display-4">Our Wedding Event</h1>
-                <i class="far fa-heart text-dark"></i>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center">
@@ -488,7 +484,6 @@
         <div class="section-title position-relative text-center">
             <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">Friends & Family</h6>
             <h1 class="font-secondary display-4">Groomsmen & Bridesmaid</h1>
-            <i class="far fa-heart text-dark"></i>
         </div>
         <div class="row">
             <div class="col-12 text-center mb-2">
@@ -618,25 +613,12 @@
         <div class="section-title position-relative text-center">
             <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">RSVP</h6>
             <h1 class="font-secondary display-4">Join Our Party</h1>
-            <i class="far fa-heart text-dark"></i>
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="text-center">
-                    <iframe id="rsvp-iframe" src="https://thegingrichwedding.rsvpify.com" width="100%" height="800" style="border: none;" sandbox="allow-same-origin allow-scripts"></iframe>
+                <div class="container-fluid p-0" id="rsvp-form" style="height: 100vh; min-height: 400px;">
+                    <iframe id="rsvp-iframe" src="https://thegingrichwedding.rsvpify.com" width="100%" height="100%" style="border: none;" sandbox="allow-same-origin allow-scripts"></iframe>
                 </div>
-                <script>
-                    document.addEventListener("DOMContentLoaded", function() {
-                        var iframe = document.getElementById("rsvp-iframe");
-                        iframe.onload = function() {
-                            var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-                            var header = iframeDocument.querySelector("header");
-                            if (header) {
-                                header.parentNode.removeChild(header);
-                            }
-                        };
-                    });
-                </script>
             </div>
         </div>
     </div>
@@ -648,7 +630,6 @@
         <div class="container text-center py-5">
             <div class="section-title position-relative text-center">
                 <h1 class="font-secondary display-3 text-white">Thank You</h1>
-                <i class="far fa-heart text-white"></i>
             </div>
             <div class="d-flex justify-content-center py-2">
                 <p class="text-white" href="#">bengingrich35@gmail.com</p>
