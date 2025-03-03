@@ -10484,3 +10484,113 @@ header h1 {
     }
 }
 }
+
+#loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 1s ease; /* Adjusted transition duration for a smoother fade */
+}
+
+#loading-overlay img {
+  width: 300px; /* Increased size */
+  height: 300px; /* Increased size */
+}
+
+#loading-overlay .spinner {
+  margin-top: 20px;
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top: 5px solid #000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#loading-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0s 1s, opacity 1s ease; /* Ensures visibility hides after opacity transition */
+}
+
+
+.carousel-control-custom {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 68px;
+  height: 68px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.carousel-control-prev-custom {
+  left: 0;
+  margin-left: 10px;
+}
+
+.carousel-control-next-custom {
+  right: 0;
+  margin-right: 10px;
+}
+
+.carousel-control-prev-custom:hover,
+.carousel-control-next-custom:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.carousel-caption {
+  z-index: 1;
+}
+
+/* Media queries for responsive font size */
+.carousel-caption h1.display-1 {
+  font-size: 12rem; /* Default font size */
+}
+
+@media (max-width: 1200px) {
+  .carousel-caption h1.display-1 {
+      font-size: 10rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .carousel-caption h1.display-1 {
+      font-size: 8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-caption h1.display-1 {
+      font-size: 6rem;
+  }
+}
+
+@media (max-width: 576px) {
+.carousel-caption h1.display-1 {
+  font-size: 4rem;
+}
+}
+
+@media (max-width: 400px) {
+.carousel-caption h1.display-1 {
+  font-size: 3rem;
+}
+}

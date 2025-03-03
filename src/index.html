@@ -24,192 +24,55 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
-    <!-- Countdown Script -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Set the date we're counting down to
-            var countDownDate = new Date("July 18, 2026 00:00:00").getTime();
-
-            // Update the count down every 1 second
-            var x = setInterval(function() {
-                // Get today's date and time
-                var now = new Date().getTime();
-
-                // Find the distance between now and the count down date
-                var distance = countDownDate - now;
-
-                // Time calculations for days, hours, minutes and seconds
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                // Display the result in the elements with id="countdown" and id="countdown2"
-                var countdownHTML = 
-                    "<div style='display: flex; justify-content: space-around; width: 100%; font-family: \"Crimson Text\", serif;'>" +
-                    "<div style='text-align: center; margin: 0 20px;'>" +
-                    "<div style='font-size: 2.5rem;'>" + days + "</div><div style='font-size: 1rem;'>Days</div></div>" +
-                    "<div style='text-align: center; margin: 0 20px;'>" +
-                    "<div style='font-size: 2.5rem;'>" + hours + "</div><div style='font-size: 1rem;'>Hours</div></div>" +
-                    "<div style='text-align: center; margin: 0 20px;'>" +
-                    "<div style='font-size: 2.5rem;'>" + minutes + "</div><div style='font-size: 1rem;'>Minutes</div></div>" +
-                    "<div style='text-align: center; margin: 0 20px;'>" +
-                    "<div style='font-size: 2.5rem;'>" + seconds + "</div><div style='font-size: 1rem;'>Seconds</div></div></div>";
-
-                document.getElementById("countdown").innerHTML = countdownHTML;
-                document.getElementById("countdown2").innerHTML = countdownHTML;
-
-                // If the count down is over, write some text and show confetti
-                if (distance < 0) {
-                    clearInterval(x);
-                    document.getElementById("countdown").innerHTML = "<div style='font-family: \"Crimson Text\", serif; font-size: 4rem;'>Our Wedding Day is Here!</div>";
-                    document.getElementById("countdown2").innerHTML = "<div style='font-family: \"Crimson Text\", serif; font-size: 4rem;'>Our Wedding Day is Here!</div>";
-                    adjustFontSize();
-
-                    function adjustFontSize() {
-                        var elements = document.querySelectorAll("#countdown div, #countdown2 div");
-                        elements.forEach(function(element) {
-                            if (window.innerWidth < 576) {
-                                element.style.fontSize = "2rem";
-                            } else if (window.innerWidth < 768) {
-                                element.style.fontSize = "3rem";
-                            } else if (window.innerWidth < 992) {
-                                element.style.fontSize = "3.5rem";
-                            } else {
-                                element.style.fontSize = "4rem";
-                            }
-                        });
-                    }
-
-                    window.addEventListener("resize", adjustFontSize);
-                    showConfetti();
-                }
-            }, 1000);
-
-            function showConfetti() {
-                var confettiContainer = document.createElement("div");
-                confettiContainer.style.position = "fixed";
-                confettiContainer.style.top = "0";
-                confettiContainer.style.left = "0";
-                confettiContainer.style.width = "100%";
-                confettiContainer.style.height = "100%";
-                confettiContainer.style.pointerEvents = "none";
-                confettiContainer.style.zIndex = "9999";
-                document.body.appendChild(confettiContainer);
-
-                var style = document.createElement("style");
-                style.innerHTML = `
-                    @keyframes confetti-fall {
-                        0% { transform: translateY(-100vh) rotate(0); }
-                        100% { transform: translateY(100vh) rotate(360deg); }
-                    }
-                `;
-                document.head.appendChild(style);
-
-                function createConfetti() {
-                    for (var i = 0; i < 200; i++) { // Increased the number of confetti elements
-                        var confetti = document.createElement("div");
-                        confetti.style.position = "absolute";
-                        confetti.style.width = "10px";
-                        confetti.style.height = "10px";
-                        confetti.style.backgroundColor = getRandomColor();
-                        confetti.style.top = Math.random() * -100 + "vh"; // Start off-screen
-                        confetti.style.left = Math.random() * 100 + "%";
-                        confetti.style.animation = "confetti-fall 3s linear infinite";
-                        confetti.style.animationDelay = Math.random() * 3 + "s";
-                        confettiContainer.appendChild(confetti);
-                    }
-                }
-
-                createConfetti();
-
-                // Remove confetti after 15 seconds
-                setTimeout(function() {
-                    document.body.removeChild(confettiContainer);
-                }, 15000); // Increased the duration to 15 seconds
-            }
-
-            function getRandomColor() {
-                var letters = "0123456789ABCDEF";
-                var color = "#";
-                for (var i = 0; i < 6; i++) {
-                    color += letters[Math.floor(Math.random() * 16)];
-                }
-                return color;
-            }
-        });
-    </script>
-    <!-- Countdown Script End -->
+    <!-- Loading Screen Styles -->
     <style>
-        .carousel-control-custom {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 68px;
-            height: 68px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-        }
-
-        .carousel-control-prev-custom {
+        #loading-overlay {
+            position: fixed;
+            top: 0;
             left: 0;
-            margin-left: 10px;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease; /* Adjusted transition duration for a smoother fade */
         }
 
-        .carousel-control-next-custom {
-            right: 0;
-            margin-right: 10px;
+        #loading-overlay img {
+            width: 300px; /* Increased size */
+            height: 300px; /* Increased size */
         }
 
-        .carousel-control-prev-custom:hover,
-        .carousel-control-next-custom:hover {
-            background-color: rgba(0, 0, 0, 0.7);
+        #loading-overlay .spinner {
+            margin-top: 20px;
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
-        .carousel-caption {
-            z-index: 1;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        /* Media queries for responsive font size */
-        .carousel-caption h1.display-1 {
-            font-size: 12rem; /* Default font size */
+        #loading-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            transition: visibility 0s 1s, opacity 1s ease; /* Ensures visibility hides after opacity transition */
         }
-
-        @media (max-width: 1200px) {
-            .carousel-caption h1.display-1 {
-                font-size: 10rem;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .carousel-caption h1.display-1 {
-                font-size: 8rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .carousel-caption h1.display-1 {
-                font-size: 6rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-        .carousel-caption h1.display-1 {
-            font-size: 4rem;
-        }
-    }
-
-    @media (max-width: 400px) {
-        .carousel-caption h1.display-1 {
-            font-size: 3rem;
-        }
-    }
-
     </style>
+    <!-- Loading Screen -->
+    <div id="loading-overlay">
+        <img src="img/favicon.ico" alt="Loading...">
+        <h2 style="font-family: 'Crimson Text', serif; margin-top: 20px; font-size: 3rem; color: black;">The Gingrich Wedding</h2>
+        <div class="spinner"></div>
+    </div>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="51">
     <!-- Navbar Start -->
